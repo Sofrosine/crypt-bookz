@@ -3,5 +3,6 @@ type RootStackParamList = {
   DiscoverPage: undefined;
   HomePage: undefined;
   MarketPage: undefined;
+  SplashPage: undefined;
   WalletPage: undefined;
 };

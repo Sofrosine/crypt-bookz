@@ -1,11 +1,9 @@
 import Header from '@components/Header';
 import {IconDefinition} from '@fortawesome/fontawesome-svg-core';
-import {faStar} from '@fortawesome/free-regular-svg-icons';
 import {
   faChartSimple,
   faHome,
   faNoteSticky,
-  faSearch,
   faUser,
   faWallet,
 } from '@fortawesome/free-solid-svg-icons';
@@ -14,6 +12,7 @@ import AccountPage from '@pages/AccountPage';
 import DiscoverPage from '@pages/DiscoverPage';
 import HomePage from '@pages/HomePage';
 import MarketPage from '@pages/MarketPage';
+import SplashPage from '@pages/SplashPage';
 import WalletPage from '@pages/WalletPage';
 import {createBottomTabNavigator} from '@react-navigation/bottom-tabs';
 import {NavigationContainer} from '@react-navigation/native';
@@ -32,6 +31,7 @@ const HomeTabPage = () => {
 
   return (
     <Tab.Navigator
+      initialRouteName="Market"
       screenOptions={({route}) => ({
         tabBarIcon: ({focused}) => {
           let iconName: IconDefinition = faChartSimple;
@@ -95,21 +95,6 @@ const HomeTabPage = () => {
             fontSize: 12,
             fontFamily: 'Inter-Medium',
           },
-          header: ({}) => (
-            <Header
-              title="Market"
-              rightTwo={
-                <FontAwesomeIcon
-                  icon={faSearch}
-                  size={20}
-                  color={Color.BLACK}
-                />
-              }
-              rightOne={
-                <FontAwesomeIcon icon={faStar} size={24} color={Color.BLACK} />
-              }
-            />
-          ),
         }}
         component={MarketPage}
       />
@@ -148,35 +133,15 @@ const Main: React.FC = () => {
     <NavigationContainer ref={navigationRef}>
       <Stack.Navigator>
         <Stack.Screen
+          name="SplashPage"
+          component={SplashPage}
+          options={{headerShown: false}}
+        />
+        <Stack.Screen
           name="HomePage"
           component={HomeTabPage}
           options={{headerShown: false}}
         />
-        {/* <Stack.Screen
-          name="MarketPage"
-          component={MarketPage}
-          options={{
-            header: () => (
-              <Header
-                title="Market"
-                rightTwo={
-                  <FontAwesomeIcon
-                    icon={faSearch}
-                    size={20}
-                    color={Color.BLACK}
-                  />
-                }
-                rightOne={
-                  <FontAwesomeIcon
-                    icon={faStar}
-                    size={24}
-                    color={Color.BLACK}
-                  />
-                }
-              />
-            ),
-          }}
-        /> */}
       </Stack.Navigator>
     </NavigationContainer>
   );

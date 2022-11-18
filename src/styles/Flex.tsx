@@ -23,10 +23,17 @@ const itemsEnd: ViewStyle = {
   alignItems: 'flex-end',
 };
 
+const pagesCenter: ViewStyle = {
+  flex: 1,
+  alignItems: 'center',
+  justifyContent: 'center',
+};
+
 export default {
   itemsCenter,
   rowItemsCenter,
   flex1,
   rowItemsBetweenCenter,
   itemsEnd,
+  pagesCenter,
 };

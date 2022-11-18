@@ -15,7 +15,7 @@ type Props = {
 
 const MarketItem: React.FC<Props> = ({item}) => {
   return (
-    <View paddingY={8} style={Flex.rowItemsBetweenCenter} paddingX={16}>
+    <View paddingY={12} style={Flex.rowItemsBetweenCenter} paddingX={16}>
       <View style={Flex.rowItemsCenter}>
         <SvgUri
           uri={item?.logo}

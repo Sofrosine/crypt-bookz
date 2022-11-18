@@ -30,3 +30,12 @@ type SupportedCurrency = {
   wallets?: Wallet[];
   priceChange?: PriceChange;
 };
+
+type FilterName = 'new' | 'name' | 'gain' | 'price';
+
+type FilterSort = 'asc' | 'desc';
+
+type FilterType = {
+  name: FilterName;
+  sort?: FilterSort | null;
+};
