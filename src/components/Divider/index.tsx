@@ -12,8 +12,17 @@ const Divider: React.FC<
     | 'marginRight'
     | 'marginY'
     | 'marginX'
+    | 'testID'
   >
-> = ({marginTop, marginBottom, marginLeft, marginRight, marginX, marginY}) => {
+> = ({
+  marginTop,
+  marginBottom,
+  marginLeft,
+  marginRight,
+  marginX,
+  marginY,
+  testID,
+}) => {
   return (
     <View
       style={styles.divider}
@@ -23,8 +32,14 @@ const Divider: React.FC<
       marginRight={marginRight}
       marginX={marginX}
       marginY={marginY}
+      testID={testID}
+      accessibilityLabel={testID}
     />
   );
+};
+
+Divider.defaultProps = {
+  testID: 'divider',
 };
 
 export default Divider;
