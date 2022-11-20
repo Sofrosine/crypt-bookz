@@ -15,6 +15,7 @@ module.exports = {
   transformIgnorePatterns: [
     '/node_modules/(?!(@react-native|react-native|@fortawesome/react-native-fontawesome)).*/',
   ],
+  setupFilesAfterEnv: ['<rootDir>/__mocks__/globalMock.js'],
   coveragePathIgnorePatterns: [
     '/.eslintrc.js',
     '/App.tsx',

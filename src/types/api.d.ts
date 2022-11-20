@@ -1,7 +1,7 @@
 type Wallet = {
   currencyGroup: string;
   tokenSymbol: string;
-  decimal_point: 2;
+  decimal_point: number;
   tokenType: string;
   blockchain: string;
   explorer: string;
