@@ -21,9 +21,10 @@ type Props = {
     type: FilterName;
     title: string;
   };
+  testID?: string;
 };
 
-const FilterItem: React.FC<Props> = ({item}) => {
+const FilterItem: React.FC<Props> = ({item, testID}) => {
   const {filter} = useContext(Store);
   const [filterData, setFilterData] = filter;
 
@@ -46,6 +47,8 @@ const FilterItem: React.FC<Props> = ({item}) => {
 
   return (
     <TouchableOpacity
+      testID={testID + `-${item?.type}`}
+      accessibilityLabel={testID + `-${item?.type}`}
       onPress={handleFilter}
       style={[
         styles.container,
@@ -99,6 +102,10 @@ const FilterItem: React.FC<Props> = ({item}) => {
       </View>
     </TouchableOpacity>
   );
+};
+
+FilterItem.defaultProps = {
+  testID: 'filter-item',
 };
 
 export default FilterItem;
