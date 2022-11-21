@@ -14,6 +14,7 @@ import Flex from '@styles/Flex';
 import styles from './styles';
 import Color from '@styles/Color';
 import {resetFilterAction} from '@actions/filter-action';
+import {layoutAnimation} from '@utils';
 
 type Props = {
   item: {
@@ -43,6 +44,7 @@ const FilterItem: React.FC<Props> = ({item, testID}) => {
         }),
       );
     }
+    layoutAnimation();
   };
 
   return (

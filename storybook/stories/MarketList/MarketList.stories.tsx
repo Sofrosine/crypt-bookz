@@ -65,6 +65,7 @@ storiesOf('MarketList', module)
       loading={false}
       onRefresh={() => Alert.alert('Refreshed')}
       data={dummyMarketItem}
+      onPress={() => {}}
     />
   ))
   .addDecorator(story => (

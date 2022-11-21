@@ -11,9 +11,10 @@ type Props = {
   data: SupportedCurrency[];
   loading: boolean;
   onRefresh: (onSuccess: () => void) => void;
+  onPress: (item: SupportedCurrency) => void;
 };
 
-const MarketList: React.FC<Props> = ({data, loading, onRefresh}) => {
+const MarketList: React.FC<Props> = ({data, loading, onRefresh, onPress}) => {
   const [isRefresh, setIsRefresh] = useState(false);
   return (
     <View style={Flex.flex1}>
@@ -31,7 +32,7 @@ const MarketList: React.FC<Props> = ({data, loading, onRefresh}) => {
             containerStyles={styles.loaderContainer}
             active
             loading={loading}>
-            <MarketItem item={item} />
+            <MarketItem onPress={() => onPress && onPress(item)} item={item} />
           </ContentLoader>
         )}
         ItemSeparatorComponent={() => <Divider />}

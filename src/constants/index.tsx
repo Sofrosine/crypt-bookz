@@ -83,5 +83,24 @@ export const FILTER_DATA: {
   {icon: faSackDollar, type: 'price', title: 'Price'},
 ];
 
+export const MODAL_DETAIL_DATA: {value: keyof PriceChange; label: string}[] = [
+  {
+    value: 'day',
+    label: '24 HOURS',
+  },
+  {
+    value: 'week',
+    label: '1 WEEK',
+  },
+  {
+    value: 'month',
+    label: '1 MONTH',
+  },
+  {
+    value: 'year',
+    label: '1 YEAR',
+  },
+];
+
 export {default as ACTION_TYPES} from './ACTION_TYPES';
 export {default as API_URL} from './API_URL';

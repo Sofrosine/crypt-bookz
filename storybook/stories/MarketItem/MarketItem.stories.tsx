@@ -37,7 +37,7 @@ const dummyMarketItem: SupportedCurrency = {
 };
 
 storiesOf('MarketItem', module)
-  .add('NORMAL', () => <MarketItem item={dummyMarketItem} />)
+  .add('NORMAL', () => <MarketItem onPress={() => {}} item={dummyMarketItem} />)
   .addDecorator(story => (
     <View style={styles.container} margin={20}>
       {story()}

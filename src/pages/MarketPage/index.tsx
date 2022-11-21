@@ -1,4 +1,10 @@
-import React, {useContext, useEffect, useLayoutEffect} from 'react';
+import React, {
+  useContext,
+  useEffect,
+  useLayoutEffect,
+  useMemo,
+  useState,
+} from 'react';
 import {setMarketAction} from '@actions';
 import FilterList from '@components/FilterList';
 import MarketList from '@components/MarketList';
@@ -9,9 +15,11 @@ import {Store} from '@reducers';
 import Color from '@styles/Color';
 import Flex from '@styles/Flex';
 import {resetFilterAction} from '@actions/filter-action';
-import {DUMMY_MARKET_DATA} from '@constants';
+import {DUMMY_MARKET_DATA, MODAL_DETAIL_DATA} from '@constants';
 import {NativeStackNavigationProp} from '@react-navigation/native-stack';
 import HeaderSearch from '@components/HeaderSearch';
+import ModalDetail from '@components/ModalDetail';
+import {layoutAnimation, showToast} from '@utils';
 
 type Props = {
   navigation: NativeStackNavigationProp<RootStackParamList, 'MarketPage'>;
@@ -21,6 +29,11 @@ const MarketPage: React.FC<Props> = ({navigation}) => {
   const {market, filter} = useContext(Store);
   const [marketData, setMarketData] = market;
   const [filterData, setFilterData] = filter;
+
+  const [modalDetailData, setModalDetailData] = useState<ModalDetailProps>({
+    label: '',
+    data: [],
+  });
 
   const {
     data: currencyData,
@@ -43,6 +56,7 @@ const MarketPage: React.FC<Props> = ({navigation}) => {
               setFilterData(resetFilterAction());
             }
           }}
+          onClose={() => combineCurrencyPrice()}
         />
       ),
     });
@@ -51,6 +65,7 @@ const MarketPage: React.FC<Props> = ({navigation}) => {
   useEffect(() => {
     if (currencyData?.length > 0 && priceChangeData?.length > 0) {
       combineCurrencyPrice();
+      layoutAnimation();
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [currencyData, priceChangeData]);
@@ -150,11 +165,40 @@ const MarketPage: React.FC<Props> = ({navigation}) => {
     }
   };
 
-  return (
-    <View style={Flex.flex1} color={Color.WHITE}>
-      <View style={Flex.rowItemsCenter}>
-        <FilterList />
-      </View>
+  const handlePressDetail = (val: SupportedCurrency) => {
+    if (val?.priceChange) {
+      const arr: PriceItemProps[] = [];
+      MODAL_DETAIL_DATA.map(v =>
+        arr.push({
+          label: v.label,
+          value: Number(val?.priceChange![v?.value]),
+        }),
+      );
+
+      setModalDetailData({
+        label: val?.name,
+        data: arr,
+        image: {
+          color: val?.color,
+          uri: val?.logo,
+        },
+      });
+    } else {
+      showToast('There is no price change on this Cyrpto data');
+    }
+  };
+
+  const MemoModalDetail = useMemo(() => {
+    return (
+      <ModalDetail
+        onClose={() => setModalDetailData({...modalDetailData, label: ''})}
+        item={modalDetailData}
+      />
+    );
+  }, [modalDetailData]);
+
+  const MemoMarketList = useMemo(() => {
+    return (
       <MarketList
         data={marketData?.data}
         loading={currencyFetching || priceChangeFetching}
@@ -165,7 +209,18 @@ const MarketPage: React.FC<Props> = ({navigation}) => {
           setFilterData(resetFilterAction());
           onSuccess();
         }}
+        onPress={handlePressDetail}
       />
+    );
+  }, [currencyFetching, priceChangeFetching, marketData]);
+
+  return (
+    <View style={Flex.flex1} color={Color.WHITE}>
+      <View style={Flex.rowItemsCenter}>
+        <FilterList />
+      </View>
+      {MemoMarketList}
+      {MemoModalDetail}
     </View>
   );
 };

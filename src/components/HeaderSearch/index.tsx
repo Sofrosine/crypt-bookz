@@ -11,9 +11,10 @@ import {Platform, StatusBar} from 'react-native';
 
 type Props = {
   onChangeText: (val: string) => void;
+  onClose: () => void;
 };
 
-const HeaderSearch: React.FC<Props> = ({onChangeText}) => {
+const HeaderSearch: React.FC<Props> = ({onChangeText, onClose}) => {
   const [isSearch, setIsSearch] = useState(false);
   return (
     <View
@@ -36,6 +37,7 @@ const HeaderSearch: React.FC<Props> = ({onChangeText}) => {
             onRightPress={() => {
               setIsSearch(false);
               layoutAnimation();
+              onClose && onClose();
             }}
             onChangeText={onChangeText}
           />
