@@ -32,9 +32,7 @@ Clone of Pintu Application, using Pintu open api
 
 ### NOTE: Make sure you already follow the react native cli guide below
 
-```
-https://reactnative.dev/docs/environment-setup
-```
+[React Native Environment Setup](https://reactnative.dev/docs/environment-setup)
 
 ### 1. iOS
 
@@ -81,6 +79,5 @@ $ yarn storybook # run storybook localhost on web
 ```
 
 ## F. Download APK
-You can find the latest apk here
-`https://drive.google.com/file/d/1p58M91cKbNc0w0ylKHSGcscHADpk4d2A/view?usp=share_link`
+You can find the latest apk [here](https://drive.google.com/file/d/1p58M91cKbNc0w0ylKHSGcscHADpk4d2A/view?usp=share_link)
 
